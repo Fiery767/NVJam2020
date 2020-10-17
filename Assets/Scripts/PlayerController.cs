@@ -25,9 +25,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(state);
+    void FixedUpdate()
+    { 
+
+        //Debug.Log(state);
         if (state != MoveState.jumping && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
@@ -45,19 +46,19 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -72,11 +73,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        Debug.Log(collision.gameObject.name);
+        if (state == MoveState.jumping && collision.gameObject.tag == "Ground")
         {
             state = MoveState.idle;
         }
     }
+
+    /*private void OnCollisionStay2D(Collision2D collision)
+    {
+
+        if (state == MoveState.jumping && collision.gameObject.tag == "Ground")
+        {
+            Debug.LogError(collision.gameObject.name);
+            state = MoveState.idle;
+        }
+    }*/
 
     public void Die()
     {

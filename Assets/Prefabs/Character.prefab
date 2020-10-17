@@ -80,7 +80,7 @@ MonoBehaviour:
   deadPrefab: {fileID: 6158436890869134090, guid: 1efdd12eba2f6e441a9a127113f85635,
     type: 3}
   rb: {fileID: 3869422628073633647}
-  speed: 0.02
+  speed: 0.1
   jumpStrength: 50
 --- !u!50 &3869422628073633647
 Rigidbody2D:

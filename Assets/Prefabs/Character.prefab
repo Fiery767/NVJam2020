@@ -42,7 +42,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3869422628073633647}
-  speed: 2
-  jumpStrength: 50
-  HorJumpStrength: 0.8
+  speed: 5
+  jumpStrength: 70
+  HorJumpStrength: 0.9
   TestClip: {fileID: 8300000, guid: f7974d38625b80d41a2c6cb499f7d0a0, type: 3}
   m_state: 0
 --- !u!50 &3869422628073633647
@@ -284,7 +284,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

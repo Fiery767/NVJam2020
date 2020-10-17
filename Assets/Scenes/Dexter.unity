@@ -2224,26 +2224,6 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7257298715728302319, guid: 690838fac5f1e084fba90cc9cc8d5af3,
-        type: 3}
-      propertyPath: narrator
-      value: 
-      objectReference: {fileID: 529725659}
-    - target: {fileID: 7257298715728302319, guid: 690838fac5f1e084fba90cc9cc8d5af3,
-        type: 3}
-      propertyPath: jumpStrength
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7257298715728302319, guid: 690838fac5f1e084fba90cc9cc8d5af3,
-        type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7257298715728302319, guid: 690838fac5f1e084fba90cc9cc8d5af3,
-        type: 3}
-      propertyPath: HorJumpStrength
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 7440098688567029535, guid: 690838fac5f1e084fba90cc9cc8d5af3,
         type: 3}
       propertyPath: m_Name

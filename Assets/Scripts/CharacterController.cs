@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    public GameObject deadPrefab;
     public Rigidbody2D rb;
     public float speed;
     public float jumpStrength;
@@ -24,6 +25,7 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(state);
         if(state != moveState.jumping && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
@@ -55,14 +57,23 @@ public class CharacterController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            die();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.tag == "ground")
-        //{
-        //
-        //}
+        if (collision.gameObject.tag == "Ground")
+        {
+            state = moveState.idle;
+        }
+    }
+
+    public void die()
+    {
+        Instantiate(deadPrefab, transform.position, Quaternion.identity);
     }
 
 

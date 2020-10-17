@@ -2,44 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public GameObject deadPrefab;
     public Rigidbody2D rb;
     public float speed;
     public float jumpStrength;
-    enum moveState
+
+    enum MoveState
     {
         jumping,
         running,
-        idle
+        idle,
+        stopped
     };
-    moveState state;
+    private MoveState state;
 
     // Start is called before the first frame update
     void Start()
     {
-        state = moveState.idle;
+        state = MoveState.stopped;
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.Log(state);
-        if(state != moveState.jumping && Input.GetKeyDown(KeyCode.Space))
+        if (state != MoveState.jumping && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
-            state = moveState.jumping;
+            state = MoveState.jumping;
         }
-        if (state != moveState.jumping && Input.GetKeyDown(KeyCode.W))
+        if (state != MoveState.jumping && Input.GetKeyDown(KeyCode.W))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
-            state = moveState.jumping;
+            state = MoveState.jumping;
         }
-        if (state != moveState.jumping && Input.GetKeyDown(KeyCode.UpArrow))
+        if (state != MoveState.jumping && Input.GetKeyDown(KeyCode.UpArrow))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
-            state = moveState.jumping;
+            state = MoveState.jumping;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -59,22 +61,30 @@ public class CharacterController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            die();
+            Die();
         }
+    }
+
+    private void SetState(MoveState state)
+    {
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
-            state = moveState.idle;
+            state = MoveState.idle;
         }
     }
 
-    public void die()
+    public void Die()
     {
         Instantiate(deadPrefab, transform.position, Quaternion.identity);
     }
 
-
+    public void PauseMovement()
+    {
+        
+    }
 }

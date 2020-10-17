@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 981931382466004709}
   - component: {fileID: 8000132478469346466}
+  - component: {fileID: 7196366681290309266}
   m_Layer: 0
   m_Name: RightSide
   m_TagString: Untagged
@@ -57,6 +58,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &7196366681290309266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040899776474243234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8a60ea7035dea34a9033e3f611881f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 7440098688567029535}
 --- !u!1 &7440098688567029535
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3869422628073633647}
   speed: 2
-  jumpStrength: 75
+  jumpStrength: 50
+  HorJumpStrength: 0.8
   TestClip: {fileID: 8300000, guid: f7974d38625b80d41a2c6cb499f7d0a0, type: 3}
   m_state: 0
 --- !u!50 &3869422628073633647
@@ -237,6 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2984367348843609567}
   - component: {fileID: 6385564930985134008}
+  - component: {fileID: 4726873484083110012}
   m_Layer: 0
   m_Name: LeftSide
   m_TagString: Untagged
@@ -284,3 +300,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &4726873484083110012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985783925007444330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8a60ea7035dea34a9033e3f611881f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 7440098688567029535}

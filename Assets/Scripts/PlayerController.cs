@@ -7,11 +7,14 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public float speed;
     public float jumpStrength;
+    public float HorJumpStrength;
     public AudioClip TestClip;
 
     private float WallJumpFacingThreshold = 0.9f;
     private float NormalGravity = 1f;
     private float WallingGravity = 0.5f;
+    private float JumpDirX = 0;
+    
 
     enum MoveState
     {
@@ -35,11 +38,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                var jumpForce = new Vector2(0, jumpStrength);
-                if (m_state == MoveState.walling)
+                if (m_state != MoveState.walling)
                 {
+                    JumpDirX = 0;
                 }
-                jumpForce.Normalize();
+                var jumpForce = new Vector2(JumpDirX * HorJumpStrength, 1);
                 rb.AddForce(jumpForce.normalized * jumpStrength);
                 SetState(MoveState.jumping);
             }
@@ -57,7 +60,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     { 
 
-        //Debug.Log(state);
+        Debug.Log(m_state);
         
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
@@ -96,14 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (m_state == MoveState.jumping && collision.gameObject.tag == "Ground")
         {
-            //if (AllContactPointsHorizontal(contactPoints))
-            //{
-                //SetState(MoveState.walling);
-            //}
-            //else
-            {
-                SetState(MoveState.idle);
-            }
+            SetState(MoveState.idle);
         }
         else if (collision.gameObject.tag == "Death")
         {
@@ -116,8 +112,9 @@ public class PlayerController : MonoBehaviour
     {
         if (m_state == MoveState.walling)
         {
-
+            SetState(MoveState.idle);
         }
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -140,5 +137,15 @@ public class PlayerController : MonoBehaviour
     public void PauseMovement()
     {
         
+    }
+
+    public void WallTrigger(bool side)
+    {
+        if (m_state != MoveState.idle)
+        {
+            SetState(MoveState.walling);
+            if (side) { JumpDirX = 1; }
+            else { JumpDirX = -1; }
+        }
     }
 }

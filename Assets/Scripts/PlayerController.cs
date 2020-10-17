@@ -28,28 +28,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (state != MoveState.jumping && Input.GetKey(KeyCode.Space))
+        if (state != MoveState.jumping)
         {
-            rb.AddForce(new Vector2(0, jumpStrength));
-            state = MoveState.jumping;
+            if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                rb.AddForce(new Vector2(0, jumpStrength));
+                state = MoveState.jumping;
+            }
         }
-        if (state != MoveState.jumping && Input.GetKey(KeyCode.W))
-        {
-            rb.AddForce(new Vector2(0, jumpStrength));
-            state = MoveState.jumping;
-        }
-        if (state != MoveState.jumping && Input.GetKey(KeyCode.UpArrow))
-        {
-            rb.AddForce(new Vector2(0, jumpStrength));
-            state = MoveState.jumping;
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             Die();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.Q))
         {
-            narrator.GetComponent<NarratorEngine>().ResetLevel();
+            GameManager.Instance.ResetLevel();
         }
     }
 
@@ -58,19 +51,11 @@ public class PlayerController : MonoBehaviour
 
         //Debug.Log(state);
         
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
         }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
-        }
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
         }
@@ -89,6 +74,11 @@ public class PlayerController : MonoBehaviour
         {
             state = MoveState.idle;
         }
+        else if (collision.gameObject.tag == "Death")
+        {
+            state = MoveState.idle;
+            Die();
+        }
     }
 
     /*private void OnCollisionStay2D(Collision2D collision)
@@ -103,9 +93,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        Instantiate(deadPrefab, transform.position, Quaternion.identity);
-        narrator.GetComponent<NarratorEngine>().AddBody(transform.position);
-        narrator.GetComponent<NarratorEngine>().PlaySound(TestClip);
+        GameManager.Instance.PlayerDie();
+        GameManager.Instance.Narrator.PlaySound(TestClip);
     }
 
     public void PauseMovement()

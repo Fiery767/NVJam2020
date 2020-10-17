@@ -18,8 +18,13 @@ public class GameManager : MonoBehaviour
     }
 
     public PlayerController Character;
+    public NarratorEngine Narrator;
+    public GameObject DeadBodyPrefab;
 
     private Vector3 SpawnPosition;
+    private List<GameObject> CurrentLevelDeadBodies;
+
+    private int m_totalDeaths = 0;
 
     // 0th scene in build settings is Master, Levels in build settings are in order
     private int m_currentLevel = 1;
@@ -29,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         m_instance = this;
         SpawnPosition = Character.transform.position;
+        CurrentLevelDeadBodies = new List<GameObject>();
     }
 
     public void StartGame()
@@ -44,7 +50,6 @@ public class GameManager : MonoBehaviour
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
         m_currentLevel++;
-
         Character.transform.position = SpawnPosition;
     }
 
@@ -56,5 +61,36 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(m_currentLevel, LoadSceneMode.Additive);
+
+        ClearAllBodies();
+    }
+
+    public void ResetLevel()
+    {
+        Narrator.ClearBodies();
+        Character.transform.position = SpawnPosition;
+    }
+
+    public void PlayerDie()
+    {
+        var deadBody = Instantiate(DeadBodyPrefab, Character.transform.position, Quaternion.identity);
+        CurrentLevelDeadBodies.Add(deadBody);
+        m_totalDeaths++;
+
+        Character.transform.position = SpawnPosition;
+    }
+
+    public List<GameObject> GetDeadBodies()
+    {
+        return CurrentLevelDeadBodies;
+    }
+
+    public void ClearAllBodies()
+    {
+        foreach (var body in CurrentLevelDeadBodies)
+        {
+            Destroy(body);
+        }
+        CurrentLevelDeadBodies.Clear();
     }
 }

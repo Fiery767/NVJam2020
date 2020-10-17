@@ -6,7 +6,7 @@ public class NarratorEngine : MonoBehaviour
 {
     public AudioSource Source;
     public AudioClip Clip;
-    List<Vector3> BodyPos = new List<Vector3>();
+    List<GameObject> DeadBodies = new List<GameObject>();
     bool Reset = false;
     int CurrentBody = 0;
     public float Speed;
@@ -22,20 +22,22 @@ public class NarratorEngine : MonoBehaviour
     {
         if(Reset)
         {
-            if (CurrentBody > BodyPos.Count - 1)
+            if (CurrentBody > DeadBodies.Count - 1)
             {
                 Reset = false;
                 CurrentBody = 0;
+                GameManager.Instance.ClearAllBodies();
             }
             else
             {
-                if (Mathf.Abs(transform.position.x - BodyPos[CurrentBody].x) >= .05 && Mathf.Abs(transform.position.y - BodyPos[CurrentBody].y) >= .05)
+                if (Vector3.Distance(transform.position, DeadBodies[CurrentBody].transform.position) > 0.0001f)
                 {
                     Timer += Time.deltaTime;
-                    transform.position = new Vector3(Mathf.Lerp(transform.position.x, BodyPos[CurrentBody].x, Timer*(Speed/100)), Mathf.Lerp(transform.position.y, BodyPos[CurrentBody].y, Timer * (Speed / 100)), transform.position.x);
+                    transform.position = Vector3.Lerp(transform.position, DeadBodies[CurrentBody].transform.position, Timer * (Speed / 100f));
                 }
                 else
                 {
+                    DeadBodies[CurrentBody].gameObject.SetActive(false);
                     CurrentBody++;
                     Timer = 0;
                 }
@@ -53,17 +55,9 @@ public class NarratorEngine : MonoBehaviour
         }
     }
 
-    public void AddBody(Vector3 v)
+    public void ClearBodies()
     {
-        BodyPos.Add(v);
-    }
-
-    public void ResetLevel()
-    {
-        foreach (Vector3 v in BodyPos)
-        {
-            Debug.Log(v);
-        }
         Reset = true;
+        DeadBodies = GameManager.Instance.GetDeadBodies();
     }
 }

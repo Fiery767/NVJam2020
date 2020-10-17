@@ -4,36 +4,44 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject deadPrefab;
-    public GameObject narrator;
     public Rigidbody2D rb;
     public float speed;
     public float jumpStrength;
     public AudioClip TestClip;
 
+    private float WallJumpFacingThreshold = 0.9f;
+    private float NormalGravity = 1f;
+    private float WallingGravity = 0.5f;
+
     enum MoveState
     {
         jumping,
         running,
-        idle,
-        stopped
+        walling,
+        idle
     };
-    private MoveState state;
+
+    [SerializeField] private MoveState m_state;
 
     // Start is called before the first frame update
     void Start()
     {
-        state = MoveState.stopped;
+        m_state = MoveState.idle;
     }
 
     private void Update()
     {
-        if (state != MoveState.jumping)
+        if (m_state != MoveState.jumping)
         {
-            if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                rb.AddForce(new Vector2(0, jumpStrength));
-                state = MoveState.jumping;
+                var jumpForce = new Vector2(0, jumpStrength);
+                if (m_state == MoveState.walling)
+                {
+                }
+                jumpForce.Normalize();
+                rb.AddForce(jumpForce.normalized * jumpStrength);
+                SetState(MoveState.jumping);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
@@ -63,33 +71,65 @@ public class PlayerController : MonoBehaviour
 
     private void SetState(MoveState state)
     {
+        if (state == MoveState.walling)
+        {
+            rb.gravityScale = WallingGravity;
+        }
+        else
+        {
+            rb.gravityScale = NormalGravity;
+        }
 
+        switch (state)
+        {
+            case MoveState.jumping:
+                break;
+            case MoveState.walling:
+                Debug.Log("WE ARE WALL");
+                break;
+        }
+
+        m_state = state;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        Debug.Log(collision.gameObject.name);
-        if (state == MoveState.jumping && collision.gameObject.tag == "Ground")
+        if (m_state == MoveState.jumping && collision.gameObject.tag == "Ground")
         {
-            state = MoveState.idle;
+            //if (AllContactPointsHorizontal(contactPoints))
+            //{
+                //SetState(MoveState.walling);
+            //}
+            //else
+            {
+                SetState(MoveState.idle);
+            }
         }
         else if (collision.gameObject.tag == "Death")
         {
-            state = MoveState.idle;
+            SetState(MoveState.idle);
             Die();
         }
     }
 
-    /*private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-
-        if (state == MoveState.jumping && collision.gameObject.tag == "Ground")
+        if (m_state == MoveState.walling)
         {
-            Debug.LogError(collision.gameObject.name);
-            state = MoveState.idle;
+
         }
-    }*/
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        //if (collision.gameObject.tag == "Ground")
+        //{
+        //    if (stayContactPoints.Count == 0 || !AllContactPointsHorizontal(stayContactPoints))
+        //    {
+        //        SetState(MoveState.jumping);
+        //    }
+        //}
+    }
 
     public void Die()
     {

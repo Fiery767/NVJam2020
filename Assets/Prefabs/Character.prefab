@@ -81,8 +81,8 @@ MonoBehaviour:
     type: 3}
   narrator: {fileID: 0}
   rb: {fileID: 3869422628073633647}
-  speed: 0.1
-  jumpStrength: 50
+  speed: 2
+  jumpStrength: 75
   TestClip: {fileID: 8300000, guid: f7974d38625b80d41a2c6cb499f7d0a0, type: 3}
 --- !u!50 &3869422628073633647
 Rigidbody2D:

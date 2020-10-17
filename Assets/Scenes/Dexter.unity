@@ -2179,6 +2179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Source: {fileID: 529725661}
   Clip: {fileID: 8300000, guid: f7974d38625b80d41a2c6cb499f7d0a0, type: 3}
+  Speed: 25
 --- !u!82 &529725661
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2351,6 +2352,16 @@ PrefabInstance:
       propertyPath: narrator
       value: 
       objectReference: {fileID: 529725659}
+    - target: {fileID: 7257298715728302319, guid: 690838fac5f1e084fba90cc9cc8d5af3,
+        type: 3}
+      propertyPath: jumpStrength
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257298715728302319, guid: 690838fac5f1e084fba90cc9cc8d5af3,
+        type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7440098688567029535, guid: 690838fac5f1e084fba90cc9cc8d5af3,
         type: 3}
       propertyPath: m_Name

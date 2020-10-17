@@ -26,11 +26,8 @@ public class PlayerController : MonoBehaviour
         state = MoveState.stopped;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    { 
-
-        //Debug.Log(state);
+    private void Update()
+    {
         if (state != MoveState.jumping && Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
@@ -46,6 +43,21 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(0, jumpStrength));
             state = MoveState.jumping;
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Die();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            narrator.GetComponent<NarratorEngine>().ResetLevel();
+        }
+    }
+
+    void FixedUpdate()
+    { 
+
+        //Debug.Log(state);
+        
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
@@ -61,10 +73,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Die();
         }
     }
 
@@ -95,7 +103,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        //Instantiate(deadPrefab, transform.position, Quaternion.identity);
+        Instantiate(deadPrefab, transform.position, Quaternion.identity);
+        narrator.GetComponent<NarratorEngine>().AddBody(transform.position);
         narrator.GetComponent<NarratorEngine>().PlaySound(TestClip);
     }
 

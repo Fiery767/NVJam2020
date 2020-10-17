@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject deadPrefab;
+    public GameObject narrator;
     public Rigidbody2D rb;
     public float speed;
     public float jumpStrength;
+    public AudioClip TestClip;
 
     enum MoveState
     {
@@ -29,17 +31,17 @@ public class PlayerController : MonoBehaviour
     { 
 
         //Debug.Log(state);
-        if (state != MoveState.jumping && Input.GetKeyDown(KeyCode.Space))
+        if (state != MoveState.jumping && Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
             state = MoveState.jumping;
         }
-        if (state != MoveState.jumping && Input.GetKeyDown(KeyCode.W))
+        if (state != MoveState.jumping && Input.GetKey(KeyCode.W))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
             state = MoveState.jumping;
         }
-        if (state != MoveState.jumping && Input.GetKeyDown(KeyCode.UpArrow))
+        if (state != MoveState.jumping && Input.GetKey(KeyCode.UpArrow))
         {
             rb.AddForce(new Vector2(0, jumpStrength));
             state = MoveState.jumping;
@@ -73,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         Debug.Log(collision.gameObject.name);
         if (state == MoveState.jumping && collision.gameObject.tag == "Ground")
         {
@@ -92,7 +95,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        Instantiate(deadPrefab, transform.position, Quaternion.identity);
+        //Instantiate(deadPrefab, transform.position, Quaternion.identity);
+        narrator.GetComponent<NarratorEngine>().PlaySound(TestClip);
     }
 
     public void PauseMovement()

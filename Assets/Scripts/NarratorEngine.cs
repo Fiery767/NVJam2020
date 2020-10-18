@@ -11,10 +11,16 @@ public class NarratorEngine : MonoBehaviour
     int CurrentBody = 0;
     public float Speed;
     public float Timer;
+    private PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
 
+    }
+
+    public void SetPlayer(PlayerController controler)
+    {
+        player = controler;
     }
 
     // Update is called once per frame
@@ -50,6 +56,10 @@ public class NarratorEngine : MonoBehaviour
         Source.enabled = true;
         if (Source.isActiveAndEnabled)
         {
+            if(Source.isPlaying)
+            {
+                Source.Stop();
+            }
             Source.clip = MyClip;
             Source.Play();
         }

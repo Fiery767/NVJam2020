@@ -868,12 +868,12 @@ PrefabInstance:
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 28.9
       objectReference: {fileID: 0}
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 59.3
       objectReference: {fileID: 0}
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
@@ -883,22 +883,22 @@ PrefabInstance:
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.69957864
       objectReference: {fileID: 0}
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7145556
       objectReference: {fileID: 0}
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
@@ -918,7 +918,12 @@ PrefabInstance:
     - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -88.786
+      objectReference: {fileID: 0}
+    - target: {fileID: 6850882372680210344, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.37486
       objectReference: {fileID: 0}
     - target: {fileID: 6850882372680210347, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
         type: 3}

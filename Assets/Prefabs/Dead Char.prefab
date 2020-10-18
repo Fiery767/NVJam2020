@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 6101486910194129920}
   - component: {fileID: 3954480866747195}
   - component: {fileID: 7024352781566321296}
+  - component: {fileID: 8571704041491848836}
   m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Ground
@@ -216,6 +217,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8571704041491848836
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132289088463187913}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4fe9b2d4df27ca41bd2f42fcdd22b05, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6158436890869134090
 GameObject:
   m_ObjectHideFlags: 0

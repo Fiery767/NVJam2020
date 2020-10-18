@@ -723,7 +723,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The Name of the Game
+  m_Text: Head in the Clouds
 --- !u!1 &4291425658388899630
 GameObject:
   m_ObjectHideFlags: 0

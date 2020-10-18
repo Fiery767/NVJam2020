@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
         jumping,
         running,
         walling,
-        idle
+        idle,
+        dead
     };
 
     [SerializeField] private MoveState m_state;
@@ -43,76 +44,82 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(facing) { sr.flipX = false; }
-        else { sr.flipX = true; }
-        if(Mathf.Abs(rb.velocity.x)>MaxVel)
+        if (m_state != MoveState.dead)
         {
-            rb.velocity = new Vector2((Mathf.Abs(rb.velocity.x)/rb.velocity.x) * MaxVel, rb.velocity.y);
-        }
-        if (m_state != MoveState.jumping)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            if (facing) { sr.flipX = false; }
+            else { sr.flipX = true; }
+            if (Mathf.Abs(rb.velocity.x) > MaxVel)
             {
-                if (m_state != MoveState.walling)
-                {
-                    JumpDirX = 0;
-                }
-                else
-                {
-                    jumpStrength = jumpStrength * 1.5f;
-                }
-                var jumpForce = new Vector2(JumpDirX * HorJumpStrength, 1);
-                rb.AddForce(jumpForce.normalized * jumpStrength);
-                SetState(MoveState.jumping);
-                jumpStrength = 70;
+                rb.velocity = new Vector2((Mathf.Abs(rb.velocity.x) / rb.velocity.x) * MaxVel, rb.velocity.y);
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Die();
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            GameManager.Instance.ResetLevel();
+            if (m_state != MoveState.jumping)
+            {
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    if (m_state != MoveState.walling)
+                    {
+                        JumpDirX = 0;
+                    }
+                    else
+                    {
+                        jumpStrength = jumpStrength * 1.5f;
+                    }
+                    var jumpForce = new Vector2(JumpDirX * HorJumpStrength, 1);
+                    rb.AddForce(jumpForce.normalized * jumpStrength);
+                    SetState(MoveState.jumping);
+                    jumpStrength = 70;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Die();
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GameManager.Instance.ResetLevel();
+            }
         }
     }
 
     void FixedUpdate()
     {
-        bool isActuallyGrounded = grounded && !(m_state == MoveState.walling) && !(m_state == MoveState.jumping);
-        Debug.Log(m_state);
-        //Debug.Log(grounded);
-        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && !grounded)
+        if (m_state != MoveState.dead)
         {
-            rb.velocity = new Vector2(rb.velocity.x - velSpeed * Time.fixedDeltaTime, rb.velocity.y);
-            facing = false;
-        }
-        else if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && grounded)
-        {
-            transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
-            facing = false;
-            if (isActuallyGrounded)
+            bool isActuallyGrounded = grounded && !(m_state == MoveState.walling) && !(m_state == MoveState.jumping);
+            //Debug.Log(m_state);
+            //Debug.Log(grounded);
+            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && !grounded)
             {
-                SetState(MoveState.running);
+                rb.velocity = new Vector2(rb.velocity.x - velSpeed * Time.fixedDeltaTime, rb.velocity.y);
+                facing = false;
             }
-        }
-        else if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && !grounded)
-        {
-            facing = true;
-            rb.velocity = new Vector2(rb.velocity.x + velSpeed * Time.fixedDeltaTime, rb.velocity.y);
-        }
-        else if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && grounded)
-        {
-            facing = true;
-            transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
-            if (isActuallyGrounded)
+            else if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && grounded)
             {
-                SetState(MoveState.running);
+                transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
+                facing = false;
+                if (isActuallyGrounded)
+                {
+                    SetState(MoveState.running);
+                }
             }
-        }
-        else if (grounded && m_state == MoveState.running)
-        {
-            SetState(MoveState.idle);
+            else if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && !grounded)
+            {
+                facing = true;
+                rb.velocity = new Vector2(rb.velocity.x + velSpeed * Time.fixedDeltaTime, rb.velocity.y);
+            }
+            else if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && grounded)
+            {
+                facing = true;
+                transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
+                if (isActuallyGrounded)
+                {
+                    SetState(MoveState.running);
+                }
+            }
+            else if (grounded && m_state == MoveState.running)
+            {
+                SetState(MoveState.idle);
+            }
         }
     }
 
@@ -148,6 +155,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Run", true);
                 break;
             case MoveState.idle:
+            case MoveState.dead:
                 anim.SetBool("Run", false);
                 anim.SetBool("Jump", false);
                 anim.SetBool("Wall", false);
@@ -198,13 +206,15 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        SetState(MoveState.dead);
+        rb.velocity = Vector2.zero;
         GameManager.Instance.PlayerDie();
         GameManager.Instance.Narrator.PlaySound(TestClip);
     }
 
-    public void PauseMovement()
+    public void Undie()
     {
-        
+        SetState(MoveState.idle);
     }
 
     public void WallTrigger(bool side)

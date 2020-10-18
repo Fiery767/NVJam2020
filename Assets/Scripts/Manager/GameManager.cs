@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         m_instance = this;
+        Character.gameObject.SetActive(false);
         SpawnPosition = Character.transform.position;
         CurrentLevelDeadBodies = new List<GameObject>();
     }
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnLevelLoaded;
         LoadNextLevel();
         MainMenuCanvas.SetActive(false);
+        Character.gameObject.SetActive(true);
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
         m_totalDeaths++;
 
         Character.transform.position = SpawnPosition;
+        Character.Undie();
     }
 
     public List<GameObject> GetDeadBodies()

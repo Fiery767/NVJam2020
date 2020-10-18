@@ -442,7 +442,8 @@ MonoBehaviour:
   Narrator: {fileID: 1177568151}
   DeadBodyPrefab: {fileID: 6158436890869134090, guid: 1efdd12eba2f6e441a9a127113f85635,
     type: 3}
-  MainMenuCanvas: {fileID: 2146344453}
+  MainMenuCanvas: {fileID: 4291425659471769396}
+  TheEndCanvas: {fileID: 4291425659471769395}
   FirstPartOfLevel: {fileID: 339532151}
   m_numLevels: 0
 --- !u!1 &1177568150
@@ -614,7 +615,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 08ff05cf6e2945b46ad1ced03fa54cf6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -953,12 +954,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &2146344453 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4291425657430290743, guid: c6f1101c10405b643b5c7a6106d1c23e,
-    type: 3}
-  m_PrefabInstance: {fileID: 4291425659471769394}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4291425659471769394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -974,7 +969,7 @@ PrefabInstance:
     - target: {fileID: 4291425657430290743, guid: c6f1101c10405b643b5c7a6106d1c23e,
         type: 3}
       propertyPath: m_Name
-      value: MainMenu
+      value: GameMenu
       objectReference: {fileID: 0}
     - target: {fileID: 4291425657430290746, guid: c6f1101c10405b643b5c7a6106d1c23e,
         type: 3}
@@ -1098,3 +1093,15 @@ PrefabInstance:
       objectReference: {fileID: 1032409843}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6f1101c10405b643b5c7a6106d1c23e, type: 3}
+--- !u!1 &4291425659471769395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6140243011004246747, guid: c6f1101c10405b643b5c7a6106d1c23e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4291425659471769394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4291425659471769396 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4291425658574993650, guid: c6f1101c10405b643b5c7a6106d1c23e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4291425659471769394}
+  m_PrefabAsset: {fileID: 0}

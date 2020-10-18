@@ -2603,5 +2603,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6850882372776068406, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6850882372776068406, guid: 437e80c6d0128ed46bcfbaec4e49d5f6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 38.42
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 437e80c6d0128ed46bcfbaec4e49d5f6, type: 3}

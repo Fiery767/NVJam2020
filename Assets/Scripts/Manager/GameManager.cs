@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> CurrentLevelDeadBodies;
 
     private int m_totalDeaths = 0;
+    private int m_numLevels;
 
     // 0th scene in build settings is Master, Levels in build settings are in order
     private int m_currentLevel = 1;

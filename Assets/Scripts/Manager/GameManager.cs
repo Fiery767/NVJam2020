@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> CurrentLevelDeadBodies;
 
     private int m_totalDeaths = 0;
-    private int m_numLevels;
+    public int m_numLevels;
 
     // 0th scene in build settings is Master, Levels in build settings are in order
     private int m_currentLevel = 1;
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         m_instance = this;
         SpawnPosition = Character.transform.position;
         CurrentLevelDeadBodies = new List<GameObject>();
+        m_numLevels = SceneManager.sceneCountInBuildSettings;
     }
 
     public void StartGame()
@@ -57,6 +58,12 @@ public class GameManager : MonoBehaviour
         m_currentLevel++;
         Character.transform.position = SpawnPosition;
         Character.Undie();
+
+        if (m_currentLevel == m_numLevels)
+        {
+            var deadBody = Instantiate(DeadBodyPrefab, Character.transform.position, Quaternion.identity);
+            Character.gameObject.SetActive(false);
+        }
     }
 
     public void LoadNextLevel()
@@ -104,6 +111,14 @@ public class GameManager : MonoBehaviour
     private void LoadDeathScene()
     {
 
+    }
+
+    private void Update()
+    {
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
     }
 
     public void ExitGame()

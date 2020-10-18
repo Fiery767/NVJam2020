@@ -401,7 +401,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 11
+      m_TileSpriteIndex: 17
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -617,7 +617,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 9
-      m_TileSpriteIndex: 9
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1058,12 +1058,12 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: a6bb8eb998fdda04a9f2713636ed2133, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 21300000, guid: c202c1e974bd87640ad6bae1b923b3b9, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: debaa4a51b6843d4c8a383b33aa56831, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: f0df80de518a54841b6fad35eb1fbfac, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: b9375b8b8ef9ad54fa1b235ef32dcdd2, type: 3}
+    m_Data: {fileID: 21300000, guid: debaa4a51b6843d4c8a383b33aa56831, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: a50b06a879993a943a157ace9c624a8b, type: 3}
   - m_RefCount: 3
@@ -1074,8 +1074,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 183fecdd094295646ac722de8ab45696, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: a47b00ce69602d8498e57218dd68be2b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: b9375b8b8ef9ad54fa1b235ef32dcdd2, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 238a7cc1be6bc574d8e78d4a41a56fe3, type: 3}
   - m_RefCount: 6
@@ -1676,7 +1676,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1000
-  m_Sprite: {fileID: 21300000, guid: 3b1fe6fba829a9a46872d387eb98f53b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 35e690800a30031479553c2b77ee0aeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

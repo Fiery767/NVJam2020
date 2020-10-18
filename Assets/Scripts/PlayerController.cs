@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         facing = true;
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        m_state = MoveState.idle;
+        m_state = MoveState.dead;
     }
 
     private void Update()

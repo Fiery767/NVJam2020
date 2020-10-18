@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float jumpStrength;
     public float HorJumpStrength;
     public AudioClip TestClip;
+    public float MaxVel;
 
     private float WallJumpFacingThreshold = 0.9f;
     private float NormalGravity = 1f;
@@ -34,6 +35,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(Mathf.Abs(rb.velocity.x)>MaxVel)
+        {
+            rb.velocity = new Vector2((Mathf.Abs(rb.velocity.x)/rb.velocity.x) * MaxVel, rb.velocity.y);
+        }
         if (m_state != MoveState.jumping)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -64,11 +69,13 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
+            rb.velocity = new Vector2(rb.velocity.x - speed * Time.fixedDeltaTime, rb.velocity.y);
+            //transform.position = new Vector3(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
+            rb.velocity = new Vector2(rb.velocity.x + speed * Time.fixedDeltaTime, rb.velocity.y);
+            //transform.position = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z);
         }
     }
 

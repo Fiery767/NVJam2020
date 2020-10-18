@@ -121,10 +121,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3869422628073633647}
-  speed: 5
+  speed: 30
   jumpStrength: 70
   HorJumpStrength: 0.9
   TestClip: {fileID: 8300000, guid: f7974d38625b80d41a2c6cb499f7d0a0, type: 3}
+  MaxVel: 10
   m_state: 0
 --- !u!50 &3869422628073633647
 Rigidbody2D:

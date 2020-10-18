@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public PlayerController Character;
     public NarratorEngine Narrator;
     public GameObject DeadBodyPrefab;
+    public GameObject MainMenuCanvas;
 
     private Vector3 SpawnPosition;
     private List<GameObject> CurrentLevelDeadBodies;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
         m_currentLevel = 1;
         SceneManager.sceneLoaded += OnLevelLoaded;
         LoadNextLevel();
+        MainMenuCanvas.SetActive(false);
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
@@ -93,5 +95,15 @@ public class GameManager : MonoBehaviour
             Destroy(body);
         }
         CurrentLevelDeadBodies.Clear();
+    }
+
+    private void LoadDeathScene()
+    {
+
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

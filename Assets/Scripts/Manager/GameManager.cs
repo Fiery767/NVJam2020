@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public NarratorEngine Narrator;
     public GameObject DeadBodyPrefab;
     public GameObject MainMenuCanvas;
+    public GameObject FirstPartOfLevel;
 
     private Vector3 SpawnPosition;
     private List<GameObject> CurrentLevelDeadBodies;
@@ -35,7 +36,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         m_instance = this;
-        Character.gameObject.SetActive(false);
         SpawnPosition = Character.transform.position;
         CurrentLevelDeadBodies = new List<GameObject>();
     }
@@ -49,13 +49,14 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnLevelLoaded;
         LoadNextLevel();
         MainMenuCanvas.SetActive(false);
-        Character.gameObject.SetActive(true);
+        FirstPartOfLevel.SetActive(false);
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
         m_currentLevel++;
         Character.transform.position = SpawnPosition;
+        Character.Undie();
     }
 
     public void LoadNextLevel()

@@ -54,11 +54,11 @@ public class PlayerController : MonoBehaviour
                 SetState(MoveState.jumping);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Die();
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             GameManager.Instance.ResetLevel();
         }

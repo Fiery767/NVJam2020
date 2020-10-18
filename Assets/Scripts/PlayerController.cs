@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public float speed;
     public float velSpeed;
-    public float jumpStrength;
     public float HorJumpStrength;
     public AudioClip TestClip;
     public float MaxVel;
@@ -20,7 +19,8 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private bool facing;
     private SpriteRenderer sr;
-    
+    private float jumpStrength = 70;
+
 
     enum MoveState
     {
@@ -57,9 +57,14 @@ public class PlayerController : MonoBehaviour
                 {
                     JumpDirX = 0;
                 }
+                else
+                {
+                    jumpStrength = jumpStrength * 1.5f;
+                }
                 var jumpForce = new Vector2(JumpDirX * HorJumpStrength, 1);
                 rb.AddForce(jumpForce.normalized * jumpStrength);
                 SetState(MoveState.jumping);
+                jumpStrength = 70;
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape))

@@ -12,10 +12,11 @@ public class NarratorEngine : MonoBehaviour
     public float Speed;
     public float Timer;
     private PlayerController player;
+    private SpriteRenderer sprite;
     // Start is called before the first frame update
     void Start()
     {
-
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     public void SetPlayer(PlayerController controler)
@@ -48,6 +49,24 @@ public class NarratorEngine : MonoBehaviour
                     Timer = 0;
                 }
             }
+        }
+
+        if (player != null)
+        {
+            var pos = player.transform.position;
+            var dot = Vector3.Dot(transform.position - pos, transform.right);
+            var mult = 1;
+            if (dot < 0)
+            {
+                mult = -1;
+                sprite.flipX = false;
+            }
+            else
+            {
+                sprite.flipX = true;
+            }
+            transform.LookAt(pos);
+            transform.localEulerAngles = new Vector3(0,0, transform.localEulerAngles.x * mult);
         }
     }
 

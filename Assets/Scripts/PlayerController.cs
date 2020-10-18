@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private bool facing;
     private SpriteRenderer sr;
-    private float jumpStrength = 70;
+    private float jumpStrength = 80;
 
 
     enum MoveState

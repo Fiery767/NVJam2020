@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioSource Source;
     public Rigidbody2D rb;
     public float speed;
     public float velSpeed;
@@ -209,7 +210,7 @@ public class PlayerController : MonoBehaviour
         SetState(MoveState.dead);
         rb.velocity = Vector2.zero;
         GameManager.Instance.PlayerDie();
-        GameManager.Instance.Narrator.PlaySound(TestClip);
+        PlaySound(TestClip);
     }
 
     public void Undie()
@@ -224,6 +225,20 @@ public class PlayerController : MonoBehaviour
             SetState(MoveState.walling);
             if (side) { JumpDirX = 1; facing = true; }
             else { JumpDirX = -1; facing = false; }
+        }
+    }
+
+    public void PlaySound(AudioClip MyClip)
+    {
+        Source.enabled = true;
+        if (Source.isActiveAndEnabled)
+        {
+            if (Source.isPlaying)
+            {
+                Source.Stop();
+            }
+            Source.clip = MyClip;
+            Source.Play();
         }
     }
 }
